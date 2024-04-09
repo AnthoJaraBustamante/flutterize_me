@@ -61,7 +61,6 @@ class ProviderCard extends StatelessWidget {
                 style: TextStyle(
                   color: AppColors.getColor(ColorName.primary),
                   fontSize: 14,
-                  fontFamily: 'Satoshi Variable',
                   fontWeight: FontWeight.w600,
                   letterSpacing: 0.10,
                 ),
@@ -74,7 +73,6 @@ class ProviderCard extends StatelessWidget {
             style: TextStyle(
               color: AppColors.getColor(ColorName.primary),
               fontSize: 18,
-              fontFamily: 'Satoshi Variable',
               fontWeight: FontWeight.w600,
               letterSpacing: 0.15,
             ),
@@ -88,7 +86,6 @@ class ProviderCard extends StatelessWidget {
               style: TextStyle(
                 color: AppColors.getColor(ColorName.darkGreyBlue),
                 fontSize: 14,
-                fontFamily: 'Satoshi Variable',
                 fontWeight: FontWeight.w500,
                 letterSpacing: 0.50,
               ),

@@ -15,6 +15,70 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
+    return Scaffold(
+      body: Stack(
+        children: [
+          _buildGradientBackground(size),
+          SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                20.height,
+                _buildTopAppBar(),
+                _buildContent(size),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Expanded _buildContent(Size size) {
+    return Expanded(
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildSectionHero(),
+            Opacity(
+              opacity: 0.32,
+              child: Container(
+                width: size.width,
+                decoration: ShapeDecoration(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(width: 1, color: AppColors.getColor(ColorName.grey)),
+                  ),
+                ),
+              ),
+            ).marginSymmetric(vertical: 31.5),
+            _buildSectionBook(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container _buildGradientBackground(Size size) {
+    return Container(
+      width: size.width,
+      height: size.height,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: const Alignment(
+            0.41,
+            -0.91,
+          ),
+          end: const Alignment(-0.41, 0.91),
+          colors: [AppColors.getColor(ColorName.background), Colors.white],
+        ),
+      ),
+    );
+  }
+
+  Column _buildSectionBook() {
     final providers = <ProviderModel>[
       ProviderModel(
         avatar: 'first',
@@ -40,69 +104,6 @@ class HomePage extends StatelessWidget {
         ],
       ),
     ];
-    return Scaffold(
-      body: Stack(
-        children: [
-          _buildGradientBackground(size),
-          SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                20.height,
-                _buildTopAppBar(),
-                _buildContent(size, providers),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Expanded _buildContent(Size size, List<ProviderModel> providers) {
-    return Expanded(
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildSectionHero(),
-            Opacity(
-              opacity: 0.32,
-              child: Container(
-                width: size.width,
-                decoration: ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 1, color: AppColors.getColor(ColorName.grey)),
-                  ),
-                ),
-              ),
-            ).marginSymmetric(vertical: 31.5),
-            _buildSectionBook(providers),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Container _buildGradientBackground(Size size) {
-    return Container(
-      width: size.width,
-      height: size.height,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: const Alignment(
-            0.41,
-            -0.91,
-          ),
-          end: const Alignment(-0.41, 0.91),
-          colors: [AppColors.getColor(ColorName.background), Colors.white],
-        ),
-      ),
-    );
-  }
-
-  Column _buildSectionBook(List<ProviderModel> providers) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -111,7 +112,6 @@ class HomePage extends StatelessWidget {
           style: TextStyle(
             color: AppColors.getColor(ColorName.darkGrey),
             fontSize: 18,
-            fontFamily: 'Satoshi Variable',
             fontWeight: FontWeight.w600,
             letterSpacing: 0.15,
           ),
@@ -146,7 +146,6 @@ class HomePage extends StatelessWidget {
                   style: TextStyle(
                     color: AppColors.getColor(ColorName.background),
                     fontSize: 14,
-                    fontFamily: 'Satoshi Variable',
                     fontWeight: FontWeight.w500,
                     letterSpacing: 0.50,
                   ),
@@ -167,7 +166,6 @@ class HomePage extends StatelessWidget {
                 style: TextStyle(
                   color: AppColors.getColor(ColorName.secondary),
                   fontSize: 14,
-                  fontFamily: 'Satoshi Variable',
                   fontWeight: FontWeight.w500,
                   letterSpacing: 0.50,
                 ),
@@ -189,7 +187,6 @@ class HomePage extends StatelessWidget {
           style: TextStyle(
             color: AppColors.getColor(ColorName.primary),
             fontSize: 24,
-            fontFamily: 'Satoshi Variable',
             fontWeight: FontWeight.w600,
           ),
         ).marginSymmetric(horizontal: 16),
@@ -200,7 +197,6 @@ class HomePage extends StatelessWidget {
           style: TextStyle(
             color: AppColors.getColor(ColorName.accent),
             fontSize: 16,
-            fontFamily: 'Satoshi Variable',
             fontWeight: FontWeight.w400,
             letterSpacing: 0.25,
           ),
@@ -215,7 +211,6 @@ class HomePage extends StatelessWidget {
       style: TextStyle(
         color: AppColors.getColor(ColorName.primary),
         fontSize: 24,
-        fontFamily: 'Satoshi Variable',
         fontWeight: FontWeight.w600,
       ),
     ).marginSymmetric(vertical: 8, horizontal: 16).marginOnly(bottom: 16);

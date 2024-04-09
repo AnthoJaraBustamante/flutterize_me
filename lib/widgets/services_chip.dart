@@ -43,7 +43,6 @@ class ServiceChip extends StatelessWidget {
             style: TextStyle(
               color: AppColors.getColor(ColorName.darkBlue),
               fontSize: 14,
-              fontFamily: 'Satoshi Variable',
               fontWeight: FontWeight.w500,
               letterSpacing: 0.50,
             ),
