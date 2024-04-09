@@ -43,118 +43,14 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            width: size.width,
-            height: size.height,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: const Alignment(
-                  0.41,
-                  -0.91,
-                ),
-                end: const Alignment(-0.41, 0.91),
-                colors: [AppColors.getColor(ColorName.background), Colors.white],
-              ),
-            ),
-          ),
+          _buildGradientBackground(size),
           SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 20.height,
                 _buildTopAppBar(),
-                Expanded(
-                  child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildSupportingText(),
-                        Opacity(
-                          opacity: 0.32,
-                          child: Container(
-                            width: size.width,
-                            decoration: ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                side: BorderSide(width: 1, color: AppColors.getColor(ColorName.grey)),
-                              ),
-                            ),
-                          ),
-                        ).marginSymmetric(vertical: 31.5),
-                        Text(
-                          'Book your visit',
-                          style: TextStyle(
-                            color: AppColors.getColor(ColorName.darkGrey),
-                            fontSize: 18,
-                            fontFamily: 'Satoshi Variable',
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 0.15,
-                          ),
-                        ).marginSymmetric(horizontal: 16),
-                        30.height,
-                        CarouselSlider(
-                          items: providers.map((provider) => ProviderCard(data: provider)).toList(),
-                          options: CarouselOptions(
-                            height: 300,
-                            enableInfiniteScroll: false,
-                            scrollDirection: Axis.horizontal,
-                          ),
-                        ),
-                        40.height,
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.getColor(ColorName.primary),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(999),
-                            ),
-                          ),
-                          onPressed: () {},
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 48,
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'Start today',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: AppColors.getColor(ColorName.background),
-                                    fontSize: 14,
-                                    fontFamily: 'Satoshi Variable',
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: 0.50,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ).marginSymmetric(horizontal: 16),
-                        16.height,
-                        TextButton(
-                          onPressed: () {},
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Maybe later, thanks',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: AppColors.getColor(ColorName.secondary),
-                                  fontSize: 14,
-                                  fontFamily: 'Satoshi Variable',
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 0.50,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ).marginSymmetric(horizontal: 16),
-                        80.height,
-                      ],
-                    ),
-                  ),
-                ),
+                _buildContent(size, providers),
               ],
             ),
           ),
@@ -163,7 +59,128 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Column _buildSupportingText() {
+  Expanded _buildContent(Size size, List<ProviderModel> providers) {
+    return Expanded(
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildSectionHero(),
+            Opacity(
+              opacity: 0.32,
+              child: Container(
+                width: size.width,
+                decoration: ShapeDecoration(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(width: 1, color: AppColors.getColor(ColorName.grey)),
+                  ),
+                ),
+              ),
+            ).marginSymmetric(vertical: 31.5),
+            _buildSectionBook(providers),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container _buildGradientBackground(Size size) {
+    return Container(
+      width: size.width,
+      height: size.height,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: const Alignment(
+            0.41,
+            -0.91,
+          ),
+          end: const Alignment(-0.41, 0.91),
+          colors: [AppColors.getColor(ColorName.background), Colors.white],
+        ),
+      ),
+    );
+  }
+
+  Column _buildSectionBook(List<ProviderModel> providers) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Book your visit',
+          style: TextStyle(
+            color: AppColors.getColor(ColorName.darkGrey),
+            fontSize: 18,
+            fontFamily: 'Satoshi Variable',
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.15,
+          ),
+        ).marginSymmetric(horizontal: 16),
+        30.height,
+        CarouselSlider(
+          items: providers.map((provider) => ProviderCard(data: provider)).toList(),
+          options: CarouselOptions(
+            height: 300,
+            enableInfiniteScroll: false,
+            scrollDirection: Axis.horizontal,
+          ),
+        ),
+        40.height,
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.getColor(ColorName.primary),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(999),
+            ),
+          ),
+          onPressed: () {},
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 48,
+                alignment: Alignment.center,
+                child: Text(
+                  'Start today',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: AppColors.getColor(ColorName.background),
+                    fontSize: 14,
+                    fontFamily: 'Satoshi Variable',
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.50,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ).marginSymmetric(horizontal: 16),
+        16.height,
+        TextButton(
+          onPressed: () {},
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Maybe later, thanks',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: AppColors.getColor(ColorName.secondary),
+                  fontSize: 14,
+                  fontFamily: 'Satoshi Variable',
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.50,
+                ),
+              ),
+            ],
+          ),
+        ).marginSymmetric(horizontal: 16),
+        80.height,
+      ],
+    );
+  }
+
+  Column _buildSectionHero() {
     return Column(
       children: [
         Text(
