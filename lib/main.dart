@@ -17,13 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.getColor(ColorName.primary)),
         useMaterial3: true,
-        fontFamily: 'Satoshi Variable',
         textTheme: const TextTheme(
-          bodyLarge: TextStyle(fontSize: 16.0),
-          bodyMedium: TextStyle(fontSize: 14.0),
-          // Puedes agregar más estilos aquí según tus necesidades
         ),
-        // Definir el peso de fuente global
       ),
       home: const HomePage(),
     );
