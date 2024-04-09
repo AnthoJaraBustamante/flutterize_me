@@ -17,9 +17,8 @@ class ProviderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Container(
-      width: size.width * 0.85,
+      constraints: const BoxConstraints(maxWidth: 311),
       height: 300,
       padding: const EdgeInsets.all(8),
       decoration: ShapeDecoration(
